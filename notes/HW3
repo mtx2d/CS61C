@@ -1,0 +1,62 @@
+HW3
+
+FORMULA: (-1)^S * (1+Significand)*2^(exponent-31)
+- 1 sign bit, 6 exponent bits, 25 significand bits
+- Denorm: -30
+
+Section 1
+
+1. 0x800000000: 1000 0000 0000 0000 ...
+Sign: -1, Exponent: -30 (denorm), Significand: 000...
+Value = -1 * 2^(-30) * 0.0000...
+
+2. 0x53530000: 0[101 001][1 0101 0011] 0000 0000 0000 0000
+Sign: 0, Exponent: [(101001)base2 - 31, Significand: 1010100110000...
+Exponent = 32 + 9 - 31 = 10
+Value = 1 * 2^10 * 1.1010100110000... = 11010100110 = 2 + 4 + 32 + 128 + 512 + 1024 = 1702
+
+3. 0xFE530000: 1[111 111][0 0101 0011] 0000 0000 0000 0000
+Sign: 1, Exponent: (111 111)base2 - 31, Significand = 0
+Exponent = 63 - 31 = 32
+Value = NaN b/c exponent is maxed & significand != 0
+
+4. 0xFE000000: 1[111 111][0 0000 0000] 0000 0000 0000 0000
+Sign: 1, Exponent: (111111)base2 - 31, Significand = 0
+Exponent = 63 - 31 = 32
+Value = -inf
+
+5. Representing the smallest non-infinite positive integer that CANNOT be represented
+- Representation: 1.xxxx... * 2^(yyyyyy - 31)
+- 2^25 to 2^26 can be represented by an integer apiece
+through the (2^25 significand bits)
+- 2^26 + 1 CANNOT be represented as it transitions into 
+increments of 2
+
+6. Smallest positive value representable NOT as a denormal #
+- Representation: 1.xxx... * 2^(yyyyyy - 31)
+- y != 0 --> y = 1 --> 1.000... * 2^(-30)
+
+7. Smallest possible positive value representable
+- Representation: 1.xxx... * 2^(yyyyyy - 31)
+- Denorm Representation: -1^(S) * 0.xxxx * 2^(-30)
+	- Smallest = 0.00...1 * 2^(-30) = 2^(-25)*2^(-30) = 2^(-55)
+
+8. Number of NaN's representable in this floating point system
+- NaN occurs when Exponent = 0, Significand != 0, Sign bit anything
+	--> 2*(2^25 - 1) = 33554431 * 2 = 67108862
+
+9. Most negative possible denormalized # representable
+- Denorm: -1^(S) * 0.xxxx * 2^(-30)
+- In binary: [1 000][000 111111...
+- In hex: 1000 0001 1111 1111... = 0x81FFFFFF
+
+Section 2
+
+Section 3
+
+1 1000000 11 1000 0000 0000 0000
+
+11 0000 0011 1000 0000 0000 0000
+3038000
+
+

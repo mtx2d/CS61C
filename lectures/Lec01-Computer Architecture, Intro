@@ -1,0 +1,44 @@
+Lecture 1
+
+Structure of CS61C
+- Main idea: hardware/software interface
+- Programming uses C b/c it's closer to underlying hardware
+- Using C to understand the structure of hardware/software
+- Old Design: Software includes: applications, compiler, assembler, OS
+  - Hardware includes: processor, memory, I/O system, circuits/transistors
+- New Machine Structures: parallel requests, parallel threads, parallel instructions,
+  parallel data, hardware descriptions
+
+6 Great Ideas in Computer Architecture
+- 6 Great Ideas of Computer Architecture: Abstraction, Moore's Law, Principle of
+  Locality/Memory Hierarchy, Parallelism, Performance Measurement/Improvement,
+  Dependability through redundancy
+    1. Abstraction: high level program --> assembly language --> machine language
+      --> hardware architecture description --> logic circuit description
+        - Learn how these levels relate to one another
+        - Maintain the separation of concerns b/w each layer of abstraction
+    2. Moore's Law: transistors per chip doubles approximately every 2 years
+    3. Principle of Locality/Memory Hierarchy: layers are constituted by
+    CPU --> CPU Cache --> Physical Memory --> Solid State Memory --> Virtual Memory
+      - Each successive lower layer gets slower, cheaper, and larger
+      - All data in upper layers exist in lower layers (CPU Cache contains everything
+      from the CPU)
+    4. Parallelism: being able to run multiple instructions simultaneously
+        - Multiple, differing tasks can be run simultaneously (in parallel)
+        - Amdahl's Law: Performance Increase Ratio = 1/(x + (1-x)/N) where x =
+        the ratio of code that is executed sequentially, N = # of CPU cores
+          - Non-parallel components constrain the increase in speed performance
+    5. Performance Measurement/Improvement: Clear metrics of progress are beneficial
+      - Latency: time it takes to set up a problem and complete it (time to FINISH)
+    6. Dependability via redundancy: the idea being that it's bad to allow a single
+       component to bring down the whole system
+        - There are benefits to doing the same thing more than once as a check
+
+Computer Architecture Today
+- 1970s: mainframes/data processing, 1980s: pC's/WWW, 1990s-2000s: smartphones/apps,
+  Onward: healthcare/education/gaming/cloud, etc.
+  - Result of a diversification of needs for broader computational architecture
+- Moore's Law used to increase performance through sheer virtue of inc. transistor density
+  - Previously, natural increase in performance led to lack of need to innovate in computing
+  - As this curve flattened, performance increase has slowed--leading to development of
+    more specialized computers

@@ -1,0 +1,80 @@
+#include <inttypes.h>
+#include <stdio.h>
+
+uint64_t bit_manip(uint64_t num) {
+	uint64_t ret = num;
+
+    // create masks
+	uint64_t chunk1 = num & 0x1FFFFF;
+	uint64_t chunk2 = (num >> 21) & 0x1FFFFF;
+	uint64_t chunk3 = (num >> 42) & 0x1FFFFF;
+	uint64_t chunk4 = (num >> 63) & 0x1FFFFF;
+
+	// rotate them right by 19 bits
+	for (int i = 0; i < 19; i++) {
+		uint64_t droppedLSB = chunk1 & 0x1;
+		chunk1 = (chunk1 >> 1) & (~(1 << 21));
+		chunk1 = chunk1 | (droppedLSB << 21); 
+	}
+	for (int i = 0; i < 19; i++) {
+		uint64_t droppedLSB = chunk2 & 0x1;
+		chunk2 = (chunk2 >> 1) & (~(1 << 21));
+		chunk2 = chunk2 | (droppedLSB << 21); 
+	}
+	for (int i = 0; i < 19; i++) {
+		uint64_t droppedLSB = chunk3 & 0x1;
+		chunk3 = (chunk3 >> 1) & (~(1 << 21));
+		chunk3 = chunk3 | (droppedLSB << 21); 
+	}
+	for (int i = 0; i < 19; i++) {
+		uint64_t droppedLSB = chunk4 & 0x1;
+		chunk4 = (chunk4 >> 1) & (~(1 << 21));
+		chunk4 = chunk4 | (droppedLSB << 21); 
+	}
+		
+	// turn on bit 18
+	chunk1 = chunk1 | 0x40000; 
+	chunk2 = chunk2 | 0x40000;
+	chunk3 = chunk3 | 0x40000;
+	chunk4 = chunk4 | 0x40000;
+	
+	// turn off bit 4
+	chunk1 = chunk1 & 0xFFFFFFFFFFFFFFEF; 
+	chunk2 = chunk2 & 0xFFFFFFFFFFFFFFEF; 
+	chunk3 = chunk3 & 0xFFFFFFFFFFFFFFEF; 
+	chunk4 = chunk4 & 0xFFFFFFFFFFFFFFEF; 
+	
+	// make number
+	ret = (chunk1 & 0x1FFFFF) |
+		  (chunk2 & 0x1FFFFF) << 21 | 
+		  (chunk3 & 0x1FFFFF) << 42 | 
+		  (chunk4 & 0x1FFFFF) << 63;
+		  
+	ret = ret & 0xFFFFFFFFFFFFFFFF;
+	
+	printf("\n%lu\n", ret);
+    return ret;
+}
+
+
+
+
+Write a function bit_manip that takes in an arbitrary 64-bit unsigned integer, and for every N = 21 set of bits starting from LSB (considering the number zero-extended to a multiple of N bits), we rotate them right by R = 19 bits and then turn on bit 18 and turn off bit 4 (within each group of 21 bits) and then return the final value.
+
+REMINDER: the score shown will be 0/0; that is not your final grade. The autograder for each question will be run after the exam period is over.
+
+As an example, if our input were a 16-bit number whose bits were 0bABCDEFGHIJKLMPQS and N = 5, we rotate it right by R = 1 bit, and ON = 1 and OFF = 3 then:
+
+0bABCDEFGHIJKLMPQS ...being thought of as groups of N = 5 bits would become
+
+A BCDEF GHIJK LMPQS ...then zero-extended to a multiple of N = 5 bits would become
+
+0000A BCDEF GHIJK LMPQS ...after the rotate right by 1 bit, R = 1, would become
+
+A0000 FBCDE KGHIJ SLMPQ ...after turning on bit ON = 1
+
+A0010 FBC1E KGH1J SLM1Q ...after turning off bit OFF = 3
+
+A0010 F0C1E K0H1J S0M1Q ...and returning the lowest 16 bits means we’d return...
+
+0b0F0C1EK0H1JS0M1Q

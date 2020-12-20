@@ -1,0 +1,59 @@
+Lecture 2: Number Representation
+
+Data Input
+- Importing analog data requires sampling (getting data at regular intervals) &
+  quantizing (assigning values to sample data)
+- Digital data also exists (analog world isn't the only source)
+  - Examples: creating images/music from the digital world
+- Bits can represent anything
+  - Letters? 26 letters --> 5 bits (2^5 = 32)
+  - Logic values? True/False --> 0/1 (1 bit)
+  - Unicode is a standard to represent most of the world's languages
+  - Key takeaway: N bits can represent at most 2^N "things"
+    - To represent N things, need: ceil(log base 2(N)) bits
+  - Pi can be represented with 0 bits (a single thing)
+    - The concept alone is represented w/o using its digits representation
+
+Numerical Base Systems
+- 1101 (base 2) = 1 + 0 * (2^1) + 1 * (2^2) + 1 * (2^3) = 1 + 4 + 8 = 13
+- A5 (base 16) = 5 + 10 * (16^1) = 165
+  - Hexadecimal system: 0, 1, 2... A, B, ... F
+  - 0x preceding a number implies it is in HEX
+- 19 = 1 * (2^4) + 0 * (2^3) + 0 * (2^2) + 1 * (2^1) + 1 * (2^0) = 10011 (base 2)
+- 11110 (base 2) = [0001][1110] (base 2) = 1E (base 16)
+  - Make sure to left-pad: add zeros to make # of digits in base 2 a multiple of 4
+- 4B (base 16) = [0100][1010] base 2 = 1001010 (base 2)
+- Byte: 8 bits, Nibble: 4 bits
+- Decimal: good for humans, hex: easy to convert to hex/more readable,
+  binary: computers use for computation
+- HEX: 0x, BIN: 0b, OCT: 0, DEC: Not preceded by anything
+
+Number Representations
+- 1010 (base 2) + 0111 (base 2) = 10001 (base 2)
+- Numerals: written representation of a number comprised of digits(example: binary bit patterns)
+- Binary bit patterns represent numbers
+  - If an operation results in a number that can't be adequately represented with
+    given # of bits, overflow occurs
+- One solution (binary odometer): Representing negative numbers uses the leftmost bit as the "sign"--1 or 0 indicates
+  whether the number if positive or negative
+  - 0111 = +7, 1111 = -7
+  - 0000 = +0, 1000 = -0
+  - Problem #1: More negative numbers are represented by a "larger" binary representation
+  - Problem #2: Two 0's exist in this system
+- 1's Complement (flip the bits): 7 (base 10) = 00111 (base2), -7 (base 10) = 11000 (base 2)
+  - System of flipping all the bits to represent a negative number
+  - Wraps around 0000, 0001, ... 01111 for positive #'s --> 10000, 10001, ... 11111
+  for negative #'s
+  - Problem: still have two 0's
+  - Solves: on negative side, as binary representation inc, so does the numerical value
+- 2's complement: Invert & add one for negative numbers
+  - 7 = 00111, -7 = 11001
+  - 2^(n-1) non-negative #'s, 2^(n-1) negative numbers
+  - To get the negative version: flip the bits, add 1
+- Bias encoding: shifting where the zero starts for a 2's complement system
+  - "Add" a bias onto the existing numbers in a system
+  - Example: 5 bits (00000-11111 with a bias = -15)
+    - Now, 00000 = -15. 00001 = -14... 11110 = 15, 11111 = 16
+  - Default bias: -(2^(N-1)-1)
+    - Results in one zero, default counting upwarding, 2^(n-1) positives, 2^(n-1)-1 negatives
+- 5 Integer Encodings: Unsigned, 1's Complement, 2's Complement, Bias Encoding
