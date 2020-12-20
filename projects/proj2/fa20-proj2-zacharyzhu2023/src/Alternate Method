@@ -1,0 +1,45 @@
+Alternate Method
+
+
+	# lw s3, 4(s0) # s7: contains pointer to filename for m0
+    # addi a0, x0, 4 # Set the argument for malloc to allocate space for a 4 byte integer
+    # jal ra, malloc # Call malloc
+    # # Check if malloc failed
+    # beq a0, x0, error_malloc # If malloc returned 0 --> go to error_malloc
+    # # Free data
+    # mv a1, a0 # a1: set to pointer of the malloc'ed space
+
+    # addi a0, x0, 4 # Set the argument for malloc to allocate space for a 4 byte integer
+    # jal ra, malloc # Call malloc
+    # # Check if malloc failed
+    # beq a0, x0, error_malloc # If malloc returned 0 --> go to error_malloc
+    # # Free data
+    # mv a2, a0 # a2: set to pointer of the malloc'ed space (for an integer) 
+    # mv a0, s3 # a0: contains pointer to filename for input
+
+    # jal ra, read_matrix
+
+    # mv s3, a0 # s3 = pointer to input matrix
+
+
+    # "Prologue"
+    addi sp, sp, -32
+    sw a0, 0(sp)
+    sw a1, 4(sp)
+    sw a2, 8(sp)
+    sw a3, 12(sp)
+    sw a4, 16(sp)
+    sw a5, 20(sp)
+    sw a6, 24(sp)
+    sw ra, 28(sp)
+
+    # "Epilogue"
+    lw a0, 0(sp)
+    lw a1, 4(sp)
+    lw a2, 8(sp)
+    lw a3, 12(sp)
+    lw a4, 16(sp)
+    lw a5, 20(sp)
+    lw a6, 24(sp)
+    lw ra, 28(sp)
+    addi sp, sp, 32

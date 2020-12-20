@@ -1,0 +1,60 @@
+import dumbpy as dp
+import numc as nc
+
+a0 = dp.Matrix(100, 100)
+a1 = a0[1:, 1:]
+a2 = a1[1:, 1:]
+a3 = a0[1:, 2:]
+a4 = a3[:94, :94]
+a5 = a2[:, :50]
+a6 = a5[:]
+a7 = a0[3:]
+a8 = a7[:, :]
+
+del a0
+del a1
+del a2
+del a4
+del a5
+del a7
+del a8
+del a3
+del a6
+
+a0 = nc.Matrix(100, 100)
+a1 = a0[1:, 1:]
+a2 = a1[1:, 1:]
+a3 = a0[1:, 2:]
+a4 = a3[:94, :94]
+a5 = a2[:, :50]
+a6 = a5[:]
+a7 = a0[3:]
+a8 = a7[:, :]
+
+del a2
+del a4
+del a3
+del a1
+del a0
+del a7
+del a5
+del a8
+del a6
+
+del a0
+del a1
+del a2
+del a4
+del a5
+del a7
+del a8
+del a3
+del a6
+
+import numc as nc
+a0 = nc.Matrix(4, 4, 1)
+a1 = a0[1:, 1:]
+a2 = a1[1:, 1:]
+del a1
+a2
+del a2

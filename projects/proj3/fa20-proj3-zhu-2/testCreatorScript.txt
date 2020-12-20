@@ -1,0 +1,17 @@
+python3 create-test.py inputs/add_test1.s inputs/addi_test1.s 
+
+python3 create-test.py inputs/beq_test1.s inputs/beq_test2.s inputs/bge_test1.s inputs/bge_test2.s inputs/bgeu_test1.s inputs/bgeu_test2.s inputs/blt_test1.s inputs/blt_test2.s inputs/bltu_test1.s inputs/bltu_test2.s
+
+python3 create-test.py inputs/bne_test1.s inputs/bne_test2.s inputs/branch_comprehensive.s inputs/branch_taken1.s inputs/branch_untaken1.s
+
+python3 create-test.py inputs/jal_test1.s inputs/jalr_test1.s inputs/jal_test2.s inputs/jalr_test2.s inputs/jalr_test3.s inputs/jumpBranch.s
+
+python3 create-test.py inputs/lb_test1.s inputs/lh_test1.s inputs/lh_test2.s inputs/lw_test1.s
+
+python3 create-test.py inputs/sb_test1.s inputs/sb_test2.s inputs/sh_test1.s inputs/sh_test2.s inputs/sw_test1.s
+
+python3 create-test.py inputs/auipc_test1.s inputs/lui_test1.s
+
+python3 create-test.py inputs/edgeTest-lui.s inputs/edgeTest-mem1.s inputs/edgeTest-mem2.s inputs/edgeTest-mem3.s inputs/edgeTest-mem4.s inputs/edgeTest-mem5.s
+
+python3 create-test.py inputs/edgeTest-jalr1.s inputs/edgeTest-jalr2.s inputs/edgeTest-jalr3.s

@@ -1,0 +1,7 @@
+[ERROR] An error has occurred!
+
+Error:
+`venusbackend.simulator.StoreError: You are attempting to edit the text of the program though the program is set to immutable at address 0x00000064!
+
+ID:
+'Trace tr Loop'!

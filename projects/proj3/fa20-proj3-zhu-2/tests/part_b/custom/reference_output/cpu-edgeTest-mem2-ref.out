@@ -1,0 +1,7 @@
+[ERROR] An uncaught error has occurred! Here are the details that may help solve this issue.
+
+Error:
+`venusbackend.simulator.SimulatorError: Attempting to access uninitialized memory between the stack and heap. Attempting to access '2' bytes at address '0x1007FFFE'.
+
+ID:
+'Trace tr Loop'!

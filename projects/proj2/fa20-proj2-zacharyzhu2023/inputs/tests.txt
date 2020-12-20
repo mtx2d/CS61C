@@ -1,0 +1,57 @@
+
+
+java -jar tools/venus.jar src/main.s -ms -1 inputs/simple0/bin/m0.bin inputs/simple0/bin/m1.bin inputs/simple0/bin/inputs/input0.bin  outputs/test_basic_main/student_basic_output00.bin
+
+java -jar tools/venus.jar src/main.s -ms -1 inputs/simple0/bin/m0.bin inputs/simple0/bin/m1.bin inputs/simple0/bin/inputs/input1.bin  outputs/test_basic_main/student_basic_output01.bin
+
+java -jar tools/venus.jar src/main.s -ms -1 inputs/simple0/bin/m0.bin inputs/simple0/bin/m1.bin inputs/simple0/bin/inputs/input2.bin  outputs/test_basic_main/student_basic_output02.bin
+
+java -jar tools/venus.jar src/main.s -ms -1 inputs/simple1/bin/m0.bin inputs/simple1/bin/m1.bin inputs/simple1/bin/inputs/input0.bin  outputs/test_basic_main/student_basic_output10.bin
+
+java -jar tools/venus.jar src/main.s -ms -1 inputs/simple1/bin/m0.bin inputs/simple1/bin/m1.bin inputs/simple1/bin/inputs/input1.bin  outputs/test_basic_main/student_basic_output11.bin
+
+java -jar tools/venus.jar src/main.s -ms -1 inputs/simple1/bin/m0.bin inputs/simple1/bin/m1.bin inputs/simple1/bin/inputs/input2.bin  outputs/test_basic_main/student_basic_output12.bin
+
+java -jar tools/venus.jar src/main.s -ms -1 inputs/simple2/bin/m0.bin inputs/simple2/bin/m1.bin inputs/simple2/bin/inputs/input0.bin  outputs/test_basic_main/student_basic_output20.bin
+
+java -jar tools/venus.jar src/main.s -ms -1 inputs/simple2/bin/m0.bin inputs/simple2/bin/m1.bin inputs/simple2/bin/inputs/input1.bin  outputs/test_basic_main/student_basic_output21.bin
+
+java -jar tools/venus.jar src/main.s -ms -1 inputs/simple2/bin/m0.bin inputs/simple2/bin/m1.bin inputs/simple2/bin/inputs/input2.bin  outputs/test_basic_main/student_basic_output22.bin
+
+
+FAULTY TESTS
+java -jar tools/venus.jar src/main.s -ms -1 a1.bin a2.bin
+java -jar tools/venus.jar src/main.s -ms -1 a1.bin a2.bin a3.bin
+java -jar tools/venus.jar src/main.s -ms -1 a1.bin a2.bin a3.bin a4.bin a5.bin
+
+java -jar tools/venus.jar src/main.s -ms -1 inputs/simple0/bin/m0.bin inputs/simple0/bin/m1.bin inputs/simple0/bin/inputs/input0.bin  outputs/test_basic_main/student_basic_output000.bin
+
+java -jar tools/venus.jar src/main.s -ms -1 inputs/simple0/bin/m0.bin inputs/simple0/bin/m1.bin inputs/simple0/bin/inputs/input0.bin  outputs/test_basic_main/student_basic_output001.bin
+
+MNIST tests
+
+java -jar tools/venus.jar src/main.s -ms -1 inputs/mnist/bin/m0.bin inputs/mnist/bin/m1.bin inputs/mnist/bin/inputs/mnist_input0.bin  outputs/test_mnist_main/student_mnist_outputs0.bin
+
+java -jar tools/venus.jar src/main.s -ms -1 inputs/mnist/bin/m0.bin inputs/mnist/bin/m1.bin inputs/mnist/bin/inputs/mnist_input1.bin  outputs/test_mnist_main/student_mnist_outputs1.bin
+
+java -jar tools/venus.jar src/main.s -ms -1 inputs/mnist/bin/m0.bin inputs/mnist/bin/m1.bin inputs/mnist/bin/inputs/mnist_input2.bin  outputs/test_mnist_main/student_mnist_outputs2.bin
+
+java -jar tools/venus.jar src/main.s -ms -1 inputs/mnist/bin/m0.bin inputs/mnist/bin/m1.bin inputs/mnist/bin/inputs/mnist_input3.bin  outputs/test_mnist_main/student_mnist_outputs3.bin
+
+java -jar tools/venus.jar src/main.s -ms -1 inputs/mnist/bin/m0.bin inputs/mnist/bin/m1.bin inputs/mnist/bin/inputs/mnist_input4.bin  outputs/test_mnist_main/student_mnist_outputs4.bin
+
+java -jar tools/venus.jar src/main.s -ms -1 inputs/mnist/bin/m0.bin inputs/mnist/bin/m1.bin inputs/mnist/bin/inputs/mnist_input5.bin  outputs/test_mnist_main/student_mnist_outputs5.bin
+
+java -jar tools/venus.jar src/main.s -ms -1 inputs/mnist/bin/m0.bin inputs/mnist/bin/m1.bin inputs/mnist/bin/inputs/mnist_input6.bin  outputs/test_mnist_main/student_mnist_outputs6.bin
+
+java -jar tools/venus.jar src/main.s -ms -1 inputs/mnist/bin/m0.bin inputs/mnist/bin/m1.bin inputs/mnist/bin/inputs/mnist_input7.bin  outputs/test_mnist_main/student_mnist_outputs7.bin
+
+java -jar tools/venus.jar src/main.s -ms -1 inputs/mnist/bin/m0.bin inputs/mnist/bin/m1.bin inputs/mnist/bin/inputs/mnist_input8.bin  outputs/test_mnist_main/student_mnist_outputs8.bin
+
+
+Outputs: 0:6, 1:9, 2:7, 3:2, 4:9, 5:4, 6:4, 7:2, 8:7
+
+
+VDB
+
+vdb unittests/assembly/TestMain_test2.s inputs/simple2/bin/m0.bin inputs/simple2/bin/m1.bin inputs/simple2/bin/inputs/input0.bin  outputs/test_basic_main/student_basic_output2.bin
