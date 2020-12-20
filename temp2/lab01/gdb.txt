@@ -1,0 +1,9 @@
+1. set args arglist
+2. break
+3. n
+4. s
+5. continue
+6. print
+7. display
+8. info locals
+9. q

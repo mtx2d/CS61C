@@ -1,0 +1,12 @@
+Errors
+
+1. add t1, s0, x0 --> lw t1, 0(s0) because we actually want the address (a pointer to)
+the array; the previous version just holds an address of the node object--not the pointer to an array.
+2. Needs slli t3, t0, 2 / add t1, t1, t3 because the offset of 4 byte values needs to
+   multiplied by 4.
+3. Needs to follow calling convention pre & post call to jalr s1. This entails saving
+   the temporary registers beforehand and restoring them upon function's completion.
+4. la a0, 8(s0) --> lw a0, 8(s0) because we want to load a pointer (the address of) the next node.
+   The previous version obtains an offsetted pointer to the node* object itself.
+5. lw a1, 0(s1) --> add a1, s1, x0 because the register s1 already stores the address
+   of the function in the register itself. The previous version

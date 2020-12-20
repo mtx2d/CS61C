@@ -1,0 +1,108 @@
+Exercise 1:
+
+Address Reference String: 84, C9, 14, 74, E8, 09, 19, D1, 5C, DE
+
+Cycle 1
+- Translate 84 to binary: 1000 0100
+- Virtual Address: Page = 100, Offset = 00100
+- Look for virtual page = 100 = 4 in TLB
+	- Not there --> TLB miss. Valid bit = 0 --> Page fault
+	- Need to bring page from hard disk to physical memory
+- Memory has room --> Fill frame0 with this page
+- Page is Page 4 in VM (brought in from disk to memorry into frame0)
+	- Word obtained has an offset of 4
+- Physical address also obtained: Physical page frame num = 0 --> page bits in addr = 00 --> Word bits identical to VA (00100)
+	- Therefore, physical address = 00 00100 --> 4
+- In page table, 4 corresponds to frame num = 0, valid bit = 1
+
+Cycle 2
+- Translate C9 to binary: 1100 1001
+- Virtual Address: Page = 110, Offset = 01001
+- Look for virtual page = 110 = 6 in TLB
+	- Not there --> TLB miss. Valid bit = 0 --> Page fault
+	- Need to bring page from hard disk to physical memory
+- Memory has room --> Fill frame1 with this page
+- Page is Page 4 in VM (brought in from disk to memorry into frame0)
+	- Word obtained has an offset of 9, as specified by VA
+- Physical address also obtained: Physical page frame num = 1 --> page bits in addr = 01 --> Word bits identical to VA (01001)
+	- Therefore, physical address = 01 01001 --> 41
+- Page table: 4 now corresponds to frame1, valid bit = 1
+
+Cycle 3
+- Translate 14 to binary: 0001 0100
+- Virtual Address: Page = 000, Offset = 10100
+- Look for virtual page = 000 in TLB
+	- Not there --> TLB miss. Valid bit = 0 --> Page fault
+	- Need to bring page from hard disk to physical memory
+- Memory has room --> Fill frame2 with this page
+- Page is Page 0 in VM (brought in from disk to memorry into frame0)
+	- Word obtained has an offset of 10100, as specified by VA
+- Physical address also obtained: Physical page frame num = 2 --> page bits in addr = 10 --> Word bits identical to VA (10100)
+	- Therefore, physical address = 10 10100 --> 84
+
+Cycle 4
+- Translate E8 to binary: 1110 1000
+- Virtual Address: Page = 111, Offset = 01000
+- Look for virtual page = 111 in TLB
+	- Not there --> TLB miss. Valid bit = 0 --> Page fault
+	- Need to bring page from hard disk to physical memory
+- Memory does NOT room --> Need to kick out least recently used frame = frame0
+	- Also need to replace corresponding entry in TLB: VPN = 4, PPN = 0 replaced w/ VPN = 7, PPN = 0
+- Page is Page 7 in VM (brought in from disk to memory into frame0)
+	- Word obtained has an offset of 01000, as specified by VA
+- Physical address also obtained: Physical page frame num = 0 --> page bits in addr = 0 --> Word bits identical to VA (01000)
+	- Therefore, physical address = 00 01000 --> 9
+- Page table: now contains for row7: frame number = 0, valid bit = 1
+
+Cycle 5
+- Translate 09 into binary: 000 01001
+- Virtual Address: Page = 000, Offset = 01001
+- Look for virtual page = 000 in TLB
+	- Present --> TLB Hit! PPN = 2
+- Physical address also obtained: Physical page frame num = 2 --> page bits in addr = 10 --> Word bits identical to VA (01001)
+	- Therefore, physical address = 10 01001 = 73
+
+...
+
+    1. 5 offset bits --> 32 Bytes
+    2. TLB Hits/Misses: 4, 6; Page Hits/Faults: 6, 0
+    3. There were no pagehits.
+    - Key question: how could there be a page hit?
+    	- Would it require the same frame number in the page table... ??
+
+
+Exercise 2:
+
+000 00000 = 00
+001 00000 = 20
+010 00000 = 40
+011 00000 = 60
+100 00000 = 80
+
+000 00000 = 00
+001 00000 = 20
+010 00000 = 40
+011 00000 = 60
+100 00000 = 80
+
+Rationale: Keeping the VPN different forces replacement in TLB (can't rehash results)
+
+
+    1. 00, 20, 40, 60, 80, 00, 20, 40, 60, 80
+
+Exercise 3:
+
+- Task: how to maintain 10 TLB misses while having < 10 page faults?
+	- Larger physical memory --> More page frames can be accommodated
+	- More page frames in memory (5+ frames) --> page hits could occur alongside TLB misses
+
+    1.
+
+--- lines below are ignored by the AG ---
+
+Exercise 1 Checkoff Questions:
+    1. See Above
+    2. PA has 2 bits to reference the 4 frames. VA has 3 bits b/c there are 7 entries in page table
+
+Exercise 4 Checkoff Question:
+    1. I am confused...

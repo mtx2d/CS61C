@@ -1,0 +1,89 @@
+Exercise 1
+
+1. What do the .data, .word, .text directives mean (i.e. what do you use them for)? 
+Hint: think about the 4 sections of memory.
+
+.word: creating space in memory to hold data
+.data: declares variables
+    - Declaration of global constants
+.text: beginning of program code
+
+2. Run the program to completion. What number did the program output? What does this number represent?
+
+Output: 34
+Represents: the 9th fibonacci number
+
+3. At what address is n stored in memory? Hint: Look at the contents of the registers.
+
+Address: 0x10000010
+
+4. Without actually editing the code (i.e. without going into the “Editor” tab), 
+have the program calculate the 13th fib number (0-indexed) by manually modifying 
+the value of a register. You may find it helpful to first step through the code. 
+If you prefer to look at decimal values, change the “Display Settings” option at the bottom.
+
+Change register x28 to start at 13 instead of 9
+
+Exercise 2
+
+1. The register representing the variable k.
+
+x5
+
+2. The register representing the variable sum.
+
+x10
+
+3. The registers acting as pointers to the source and dest arrays.
+
+source pointer: x9
+dest pointer: x18
+
+4. The assembly code for the loop found in the C code.
+
+loop:
+    slli s3, t0, 2 # Increment by 4 in the actual array
+    add t1, s1, s3
+    lw t2, 0(t1)
+    beq t2, x0, exit
+    add a0, x0, t2
+    addi sp, sp, -8
+    sw t0, 0(sp)
+    sw t2, 4(sp)
+    jal fun
+    lw t0, 0(sp)
+    lw t2, 4(sp)
+    addi sp, sp, 8
+    add t2, x0, a0
+    add t3, s2, s3
+    sw t2, 0(t3)
+    add s0, s0, t2
+    addi t0, t0, 1 # Increment a pointer by 1: loop counter
+    jal x0, loop
+
+5. How the pointers are manipulated in the assembly code.
+
+Add 4 to the initial base address--save the base address & a pointer to it. Then, increment the pointer
+by 4's w/ either bit arithmetic or add/addi.
+
+Exercise 4
+1. What caused the errors in simple_fn, naive_pow, and inc_arr that were reported by the Venus CC checker?
+
+Not sw'ing the save registers or other registers beforehand that were going to be manipulated.
+Also failing to restore them to their original values. inc_arr also needed to save t0.
+
+2. In RISC-V, we call functions by jumping to them and storing the return address in the ra register. Does calling convention apply to the jumps to the naive_pow_loop or naive_pow_end labels?
+
+No--these aren't separate functions (within the same local scope).
+
+3. Why do we need to store ra in the prologue for inc_arr, but not in any other function?
+
+inc_arr needs to store ra b/c it's calling another function within it, so the return value needs to be protected
+from getting overwritten.
+
+4. Why wasn’t the calling convention error in helper_fn reported by the CC checker? (Hint: it’s mentioned above in the exercise instructions.)
+
+Venus treats the call to helper_fn as a jump; thus, since it was a function called from a function,
+it won't alert us of an error (risk of false positive).
+
+
